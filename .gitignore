@@ -1,0 +1,22 @@
+# build artifacts
+/build/
+/build-*/
+*.obj
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.exe
+*.dll
+*.o
+*.a
+*.so
+*.dylib
+# IDE
+.vs/
+.vscode/
+CMakeLists.txt.user
+CMakeCache.txt
+# runtime/persisted state
+*.fflog
+ff_state_*
