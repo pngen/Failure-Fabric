@@ -1,0 +1,16 @@
+Failure Fabric
+
+Copyright © Summon Software Labs
+
+Failure Fabric is an open-source, vendor-neutral runtime for explicit failure semantics, retry classification, ambiguous completion, idempotency, rollback, fencing, recovery ownership, and deterministic fault handling across distributed AI infrastructure.
+
+This product is licensed under the Apache License, Version 2.0. See the
+LICENSE file in this distribution for the full license text.
+
+Failure Fabric does not collect or transmit any telemetry. All telemetry is
+written to local files chosen by the operator and never leaves the machine
+running the software.
+
+Failure Fabric accepts contributions from individuals and organizations on the
+terms of the Apache License 2.0 without requiring a Contributor License
+Agreement (CLA). See CONTRIBUTING.md for contribution guidance.

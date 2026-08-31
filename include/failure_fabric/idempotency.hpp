@@ -21,6 +21,7 @@ struct IdempotencyKey {
 enum class IdempotencyVerdict : uint32_t {
   NEW, IN_PROGRESS_REPLAY, COMPLETED_REPLAY, CONFLICT, STALE
 };
+const char* to_string(IdempotencyVerdict v) noexcept;
 
 enum class IdempotencyState : uint32_t { IN_PROGRESS, COMPLETED, FAILED, CONFLICT };
 

@@ -2,6 +2,16 @@
 #include <unordered_map>
 
 namespace ff {
+const char* to_string(IdempotencyVerdict v) noexcept {
+  switch (v) {
+    case IdempotencyVerdict::NEW: return "NEW";
+    case IdempotencyVerdict::IN_PROGRESS_REPLAY: return "IN_PROGRESS_REPLAY";
+    case IdempotencyVerdict::COMPLETED_REPLAY: return "COMPLETED_REPLAY";
+    case IdempotencyVerdict::CONFLICT: return "CONFLICT";
+    case IdempotencyVerdict::STALE: return "STALE";
+  }
+  return "UNKNOWN";
+}
 IdempotencyVerdict IdempotencyStore::begin(const OperationId& op, const IdempotencyKey& key,
                                            uint64_t hash, const AuthorityEnvelope& auth) {
   PairKey pk{op, key};

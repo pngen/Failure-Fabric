@@ -11,6 +11,19 @@ const char* to_string(RetryVerdict v) noexcept {
   }
   return "UNKNOWN";
 }
+static Retryability eff_retryability(const FailureRecord& fail) {
+  if (fail.retryability != Retryability::UNKNOWN) return fail.retryability;
+  switch (fail.failure_class) {
+    case FailureClass::TRANSIENT: case FailureClass::RETRYABLE: case FailureClass::PREEMPTED:
+    case FailureClass::RESOURCE_EXHAUSTION: case FailureClass::EXECUTION_FAILURE:
+      return Retryability::RETRYABLE;
+    case FailureClass::AMBIGUOUS: case FailureClass::PARTIAL_SUCCESS: case FailureClass::LOST_WORKER:
+    case FailureClass::LOST_DEVICE: case FailureClass::TRANSPORT_FAILURE: case FailureClass::TIMEOUT_OBSERVED:
+    case FailureClass::DEPENDENCY_FAILURE: case FailureClass::STORAGE_FAILURE:
+      return Retryability::CONDITIONALLY_RETRYABLE;
+    default: return Retryability::NON_RETRYABLE;
+  }
+}
 RetryDecision RetryClassifier::classify(const FailureRecord& fail, const RetryInput& in, const RetryPolicy& policy) const {
   RetryDecision d;
   d.reason = "DO_NOT_RETRY by default";
@@ -89,8 +102,8 @@ RetryDecision RetryClassifier::classify(const FailureRecord& fail, const RetryIn
   }
 
   // Retryable class, idempotency not required for known-no-side-effect failures.
-  const bool retryable_class = fail.retryability == Retryability::RETRYABLE ||
-                              fail.retryability == Retryability::CONDITIONALLY_RETRYABLE;
+  const bool retryable_class = eff_retryability(fail) == Retryability::RETRYABLE ||
+                              eff_retryability(fail) == Retryability::CONDITIONALLY_RETRYABLE;
   if (retryable_class) {
     if (in.deadline_exceeded) {
       d.verdict = RetryVerdict::DO_NOT_RETRY;

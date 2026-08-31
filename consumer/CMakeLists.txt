@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.24)
+project(FailureFabricConsumer LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(FailureFabric REQUIRED)
+add_executable(consumer main.cpp)
+target_link_libraries(consumer PRIVATE ff::FailureFabric)
+target_compile_options(consumer PRIVATE /W4 /WX)

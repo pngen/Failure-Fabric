@@ -20,3 +20,10 @@ CMakeCache.txt
 # runtime/persisted state
 *.fflog
 ff_state_*
+# package / consumer / runtime artifacts
+/prefix/
+/consumer/build/
+ff_mp_work/
+*state.bin
+*.fflog
+consumer/_build.bat
