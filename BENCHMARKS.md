@@ -1,18 +1,18 @@
 # Failure Fabric Benchmarks
 
-Run with \`ff_benchmark [n]\` (default \`n=200000\`). Results are measured on the build machine and are reported in actual units.
+Run with \`ff_benchmark [n]\` (default \`n=200000\`). Results are measured on the build machine (RTX 5090 host, MSVC Release) and are reported in actual units. Values vary slightly run to run under host load; each is a single measured run.
 
 | Metric | measured (n=200000) |
 | --- | --- |
-| failure-record append | 2.45 M ops/s |
-| classification | 3.97 M ops/s |
-| recovery-plan generation | 1.60 M ops/s |
-| idempotency lookup (dup rejection) | 43.7 M ops/s |
-| state reconstruction | 2.14 M ops/s |
-| persistence save | 296.5 ms (134.9 MB/s) |
-| persistence load | 489.7 ms |
-| deterministic replay | 429 k ops/s |
-| concurrent failure ingestion | 764 k ops/s (8 threads, 1.15M records) |
-| explanation generation | 451 k ops/s |
+| failure-record append | 1.79 M ops/s |
+| classification | 2.68 M ops/s |
+| recovery-plan generation | 1.23 M ops/s |
+| idempotency lookup (dup rejection) | 43.4 M ops/s |
+| state reconstruction | 1.09 M ops/s |
+| persistence save | 289.1 ms (138.4 MB/s) |
+| persistence load | 455.7 ms |
+| deterministic replay | 458 k ops/s |
+| concurrent failure ingestion | 869 k ops/s (8 threads, 1.31M records) |
+| explanation generation | 438 k ops/s |
 
-These numbers are representative of a single run on the validation machine (RTX 5090 host, MSVC Release). Re-run on your target hardware for your own figures.
+Re-run on your target hardware for your own figures.
