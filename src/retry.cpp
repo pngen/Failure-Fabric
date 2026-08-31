@@ -2,6 +2,15 @@
 #include "failure_fabric/authority.hpp"
 
 namespace ff {
+const char* to_string(RetryVerdict v) noexcept {
+  switch (v) {
+    case RetryVerdict::RETRY: return "RETRY";
+    case RetryVerdict::DO_NOT_RETRY: return "DO_NOT_RETRY";
+    case RetryVerdict::RETRY_ELSEWHERE: return "RETRY_ELSEWHERE";
+    case RetryVerdict::ROLLBACK_FIRST: return "ROLLBACK_FIRST";
+  }
+  return "UNKNOWN";
+}
 RetryDecision RetryClassifier::classify(const FailureRecord& fail, const RetryInput& in, const RetryPolicy& policy) const {
   RetryDecision d;
   d.reason = "DO_NOT_RETRY by default";

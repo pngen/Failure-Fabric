@@ -11,6 +11,7 @@
 namespace ff {
 
 enum class RetryVerdict : uint32_t { RETRY, DO_NOT_RETRY, RETRY_ELSEWHERE, ROLLBACK_FIRST };
+const char* to_string(RetryVerdict v) noexcept;
 
 struct RetryDecision {
   RetryVerdict verdict = RetryVerdict::DO_NOT_RETRY;

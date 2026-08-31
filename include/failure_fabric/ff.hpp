@@ -14,3 +14,5 @@
 #include "failure_fabric/retry.hpp"
 #include "failure_fabric/persistence.hpp"
 #include "failure_fabric/store.hpp"
+#include "failure_fabric/protocol.hpp"
+#include "failure_fabric/explain.hpp"
